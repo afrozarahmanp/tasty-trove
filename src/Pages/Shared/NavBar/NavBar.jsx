@@ -20,10 +20,8 @@ const NavBar = () => {
       </li>
       <li>
         <Link to="/">
-          <button className="btn">
-            <FaShoppingCart></FaShoppingCart>
-            <div className="badge badge-secondary">+99</div>
-          </button>
+          <FaShoppingCart></FaShoppingCart>
+          <div className="badge badge-secondary">+99</div>
         </Link>
       </li>
       <li>
@@ -64,7 +62,7 @@ const NavBar = () => {
         <ul className="menu menu-horizontal px-1">{navItems}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        <a className="btn">Menu</a>
       </div>
     </div>
   );
