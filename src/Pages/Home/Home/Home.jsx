@@ -5,11 +5,15 @@ import PopularMenu from '../PopularMenu/PopularMenu';
 import Featured from '../Featured/Featured';
 import Testimonials from '../Testimonials/Testimonials';
 import AboutBanner from '../AboutBanner/AboutBanner';
+import { Helmet } from 'react-helmet-async';
 
 
 const Home = () => {
     return (
         <div>
+            <Helmet>
+                <title>Trasty Trove | Home</title>
+            </Helmet>
            <Banner></Banner>
            <Category></Category>
            <AboutBanner></AboutBanner>
