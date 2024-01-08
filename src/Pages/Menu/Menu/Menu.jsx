@@ -8,7 +8,7 @@ import coverImg3 from '../../../assets/menu/salad-bg.jpg'
 import coverImg4 from '../../../assets/menu/soup-bg.jpg'
 
 
-import UseMenu from '../../../hooks/UseMenu';
+import UseMenu from '../../../hooks/useMenu';
 import SectionTitle from '../../../Components/SectionTitle/SectionTitle';
 import MenuCategory from '../MenuCategory/MenuCategory';
 
@@ -32,7 +32,7 @@ const Menu = () => {
 
             <SectionTitle subHeading="Don't Miss" heading="Today's offer"></SectionTitle>
 
-            <MenuCategory items ={offered}></MenuCategory>
+            <MenuCategory items ={offered} title='offered' coverImg={coverImg2}></MenuCategory>
             <MenuCategory items={dessert} title='dessert' coverImg={coverImg1}> </MenuCategory>
             <MenuCategory items={soup} title='soup' coverImg={coverImg4}> </MenuCategory>
             <MenuCategory items={pizza} title='pizza' coverImg={coverImg2}> </MenuCategory>

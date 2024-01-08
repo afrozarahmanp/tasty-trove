@@ -9,10 +9,7 @@ const Cover = ({ img, title }) => {
       bgImageAlt="the dog"
       strength={-200}
     >
-      <div
-       
-        className=" text-white pt-8"
-      >
+      <div className=" text-white pt-8">
         <div className="p-36">
           <div className="bg-black bg-opacity-40 p-16 md:flex justify-center items-center flex-col">
             <h2 className="text-5xl mb-5 uppercase">{title}</h2>
