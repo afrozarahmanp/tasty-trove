@@ -23,36 +23,38 @@ const Order = () => {
   const drinks = menu.filter((item) => item.category === "drinks");
 
   return (
-    <div>
+    <div className="mb-12">
       <Helmet>
         <title>Tasty Trove | Order Food</title>
       </Helmet>
       <Cover img={orderCover} title="order food"></Cover>
 
-      <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
-        <TabList>
-          <Tab>Salad</Tab>
-          <Tab>Pizza</Tab>
-          <Tab>Soup</Tab>
-          <Tab>Dessert</Tab>
-          <Tab>Drinks</Tab>
-        </TabList>
-        <TabPanel>
-          <OrderTab items={salad}></OrderTab>
-        </TabPanel>
-        <TabPanel>
-          <OrderTab items={pizza}></OrderTab>
-        </TabPanel>
-        <TabPanel>
-          <OrderTab items={soup}></OrderTab>
-        </TabPanel>
-        <TabPanel>
-          <OrderTab items={dessert}></OrderTab>
-        </TabPanel>
-        <TabPanel>
-          <OrderTab items={drinks}></OrderTab>
-        </TabPanel>
-      </Tabs>
+      <div className="mt-10">
+        <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
+          <TabList>
+            <Tab>Salad</Tab>
+            <Tab>Pizza</Tab>
+            <Tab>Soup</Tab>
+            <Tab>Dessert</Tab>
+            <Tab>Drinks</Tab>
+          </TabList>
+          <TabPanel>
+            <OrderTab items={salad}></OrderTab>
+          </TabPanel>
+          <TabPanel>
+            <OrderTab items={pizza}></OrderTab>
+          </TabPanel>
+          <TabPanel>
+            <OrderTab items={soup}></OrderTab>
+          </TabPanel>
+          <TabPanel>
+            <OrderTab items={dessert}></OrderTab>
+          </TabPanel>
+          <TabPanel>
+            <OrderTab items={drinks}></OrderTab>
+          </TabPanel>
+        </Tabs>
+      </div>
     </div>
   );
 };
