@@ -10,24 +10,39 @@ import { app } from "../firebase/firebase.config";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const createUser = (email, password) => {
+  const createUser = async (email, password) => {
     setLoading(true);
-    createUserWithEmailAndPassword(auth, email, password);
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      console.error("Error during user creation:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const signIn = (email, password) =>{
+  const signIn = async (email, password) => {
     setLoading(true);
-    signInWithEmailAndPassword(email, password)
-  }
+    try {
+      const result = await signInWithEmailAndPassword(auth, email, password);
+      setLoading(false); 
+      return result; 
+    } catch (error) {
+      setLoading(false);
+      console.error("Error during sign-in:", error);
+      throw error; 
+    }
+  };
+  
 
-  const logOut = ()=>{
-    setLoading(true)
-    return signOut(auth)
-  }
+  const logOut = () => {
+    setLoading(true);
+    return signOut(auth);
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -45,8 +60,7 @@ const AuthProvider = ({children}) => {
     loading,
     createUser,
     signIn,
-    logOut
-
+    logOut,
   };
 
   return (
