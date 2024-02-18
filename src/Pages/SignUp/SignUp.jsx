@@ -5,24 +5,41 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const {createUser} = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
-
     console.log(data);
     createUser(data.email, data.password)
-    .then(result=>{
-      const loggedUser = result.user;
-      console.log(loggedUser)
-    })
+      .then((result )=> {
+      // const loggedUser = result.user;
+      // console.log("loggedUser:", loggedUser);
+      updateUserProfile(data.name, data.photoURL)
+        .then(() => {
+          console.log("User profile updated");
+          reset();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your work has been saved",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate('/')
+        })
+        .catch((error) => console.log(error));
+    });
   };
 
   return (
@@ -103,6 +120,23 @@ const SignUp = () => {
                     Forgot password?
                   </a>
                 </label>
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">PhotoURL</span>
+                </label>
+                <input
+                  type="name"
+                  name="photoURL"
+                  {...register("photoURL", { required: true })}
+                  placeholder="photoURL"
+                  className="input input-bordered"
+                />
+                {errors.photoURL && (
+                  <span className="text-red-600 mt-2">
+                    PhotoURL is required
+                  </span>
+                )}
               </div>
 
               <div className="form-control mt-6">

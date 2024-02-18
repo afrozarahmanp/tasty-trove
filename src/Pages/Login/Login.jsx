@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import loginImg from "../../assets/others/Illustration.svg";
+import Swal from "sweetalert2";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
@@ -12,6 +14,10 @@ import { Helmet } from "react-helmet-async";
 const Login = () => {
   const captchaRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const { signIn } = useContext(AuthContext);
 
@@ -28,6 +34,24 @@ const Login = () => {
     signIn(email, password).then((result) => {
       const user = result.user;
       console.log(user);
+      Swal.fire({
+        title: "Login Successful",
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `,
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `,
+        },
+      });
+      navigate(from, { replace: true });
     });
   };
 
@@ -35,9 +59,8 @@ const Login = () => {
     const user_captcha_value = captchaRef.current.value;
     if (validateCaptcha(user_captcha_value)) {
       setDisabled(false);
-    }
-    else {
-      setDisabled(true)
+    } else {
+      setDisabled(true);
     }
   };
 
